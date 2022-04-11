@@ -2,59 +2,43 @@ import re
 from striprtf.striprtf import rtf_to_text
 import csv
 
-
+# Read RTF file. You can make an RTF from the rules document using Adobe's online converter
 with open('FSAE_Rules_2022_V21.rtf', 'r') as file:
     rtf = file.read()
     
+# Convert RTF to Text format
 text = rtf_to_text(rtf)
 
+# Write to text file for any debugging
 with open('text.txt', 'w') as f:
     f.write(text)
 
 
-m = re.findall('(EV(.|\n)+?)(?=\n*EV\.)',text)
 
 
 with open('export.csv','w', newline='') as f:
     writer = csv.writer(f)
 
+
+    # Find all occurences of pattern that signifies a rule start
+    regex = re.findall('(EV(.|\n)+?)(?=\n*EV\.)',text)
     
+    # Skip first one, as first occurence always is whole document
+    for x in range(2,len(regex)):
 
-    for x in range(2,len(m)):
+        result = regex[x]
 
-
-        line = m[x]
-
-        print('======')
-
-        rule = re.search('(EV.+?) ', line[0])
+        # regex rule code out of line result
+        ruleCode = re.search('(EV.+?) ', result[0])
         
-        
-        if rule:
-            ruleTxt = rule.groups()[0]
+        if ruleCode:
+            # get text of rule code if present in result
+            ruleCodeText = ruleCode.groups()[0]
 
-            length = len(rule.groups()[0])
-            ruleContent = line[0][length:]
+            # trim off rule code from text
+            length = len(ruleCode.groups()[0])
+            ruleContent = result[0][length:]
 
-            row = ruleTxt, ruleContent
-
-            print(row)
-
+            # concat row for csv and write to csv
+            row = ruleCodeText, ruleContent
             writer.writerow(row)
-
-
-
-        
-
-
-          
-            
-
-            
-
-    
-
-    
-
-
-        
