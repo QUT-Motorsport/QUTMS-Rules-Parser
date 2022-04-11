@@ -3,7 +3,7 @@ from striprtf.striprtf import rtf_to_text
 import csv
 
 # Read RTF file. You can make an RTF from the rules document using Adobe's online converter
-with open('FSAE_Rules_2022_V21.rtf', 'r') as file:
+with open('FSAE_Rules_2021_V1.rtf', 'r') as file:
     rtf = file.read()
     
 # Convert RTF to Text format
@@ -12,8 +12,6 @@ text = rtf_to_text(rtf)
 # Write to text file for any debugging
 with open('text.txt', 'w') as f:
     f.write(text)
-
-
 
 
 with open('export.csv','w', newline='') as f:
