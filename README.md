@@ -3,4 +3,6 @@ For FSAE rules documents.
 
 ## PDF to RTF
 For converting doc to rich text for parsing
-https://www.adobe.com/acrobat/hub/how-to/how-to-convert-rtf-to-pdf
+https://helpx.adobe.com/acrobat/using/exporting-pdfs-file-formats.html
+
+File -> Export To -> Rich Text Format
